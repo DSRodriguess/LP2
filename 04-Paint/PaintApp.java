@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 
 class PaintApp {
     public static void main (String[] args) {
