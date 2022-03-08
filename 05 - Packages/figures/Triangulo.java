@@ -30,6 +30,7 @@ public class Triangulo {
     public void Paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
+
         g2d.drawLine(this.x1, this.y1, this.x2, this.y2);
         g2d.drawLine(this.x2, this.y2, this.x3, this.y3);
         g2d.drawLine(this.x3, this.y3, this.x1, this.y1);
