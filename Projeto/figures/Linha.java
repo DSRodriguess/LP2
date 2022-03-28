@@ -7,10 +7,7 @@ public class Linha extends Figure {
 
 
     public Linha (int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super (x, y,w,h);
     }
 
     public void print () {

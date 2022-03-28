@@ -1,9 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import org.w3c.dom.events.MouseEvent;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,7 +16,9 @@ class ListApp {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
-    Point PrevPt;
+    Figure selectedFigure = null;
+    Point mousePointPosition = new Point(0, 0);
+   
 
     ListFrame () {
         this.addWindowListener (
@@ -29,7 +28,7 @@ class ListFrame extends JFrame {
                 }
             }
         );
-        
+
         this.addMouseListener (
             new MouseAdapter() {
 
@@ -74,6 +73,9 @@ class ListFrame extends JFrame {
                 }
             }
         );
+   
+
+
 
         this.addKeyListener (
             new KeyAdapter() {
@@ -84,12 +86,12 @@ class ListFrame extends JFrame {
                     int h = rand.nextInt(50);
 
                     if (evt.getKeyChar() == 'r') {
-                        Rect r = new Rect(x,y, w,h,Color.green,Color.black);
+                        Rect r = new Rect(x,y, w,h);
                         figs.add(r);
                     } else if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(x,y, w,h,Color.blue,Color.pink));
+                        figs.add(new Ellipse(x,y, w,h));
                     } else if (evt.getKeyChar() == 't') {
-                        figs.add(new Texto(x,y));
+                        figs.add(new Texto(x,y, h, h));
                     }else if (evt.getKeyChar() == 'l') {
                         figs.add(new Linha(x,y,w,h));
                     }

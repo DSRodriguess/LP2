@@ -6,9 +6,8 @@ import java.awt.*;
 public class Texto extends Figure {
 
 
-    public Texto (int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Texto (int x, int y, int w, int h) {
+        super (x, y,w,h);
     }
 
     public void print () {

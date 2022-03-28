@@ -4,16 +4,9 @@ import java.awt.*;
 
 public class Rect extends Figure {
 
-    Color corBorda;
-    Color corPreenchimento;
 
-    public Rect (int x, int y, int w, int h, Color corBorda, Color corPreenchimento) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.corBorda = corBorda;
-        this.corPreenchimento = corPreenchimento;
+    public Rect (int x, int y, int w, int h) {
+        super (x, y,w,h);
     }
 
     public void print () {

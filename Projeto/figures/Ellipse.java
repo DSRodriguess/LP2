@@ -8,13 +8,8 @@ public class Ellipse extends Figure {
     Color corPreenchimento;
     Color corBorda;
 
-    public Ellipse (int x, int y, int w, int h,Color corBorda, Color corPreenchimento) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.corBorda = corBorda;
-        this.corPreenchimento = corPreenchimento;
+    public Ellipse (int x, int y, int w, int h) {
+        super (x, y,w,h);
     }
 
     public void print () {
