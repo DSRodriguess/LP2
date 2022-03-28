@@ -32,15 +32,44 @@ class ListFrame extends JFrame {
         
         this.addMouseListener (
             new MouseAdapter() {
-                public void mousePressed (MouseEvent mouseEvent) {
 
+                public int x, y;
+                public int size = 50;
+
+                public void mousePressed (MouseEvent evt) {
+                    selectedFigure = null;
+                    if (evt.getButton() == 1){
+                        Point mousePointPosition = new Point(evt.getX(),evt.getY());
+                        for (Figure fig:figs){
+                            System.out.println("chamo quando clicou");
+                            System.out.println(mousePointPosition);
+                            if ((mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + this.size) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + this.size) == true){
+                                selectedFigure = fig;
+                            }
+                        }
+
+                        if (selectedFigure != null) {
+                            figs.remove(selectedFigure);
+                            figs.add(selectedFigure);
+                        }
+                    }
                 }
-                }
+            }
+
         );
 
         this.addMouseMotionListener (
             new MouseAdapter() {
-                public void mouseDragged (MouseEvent mouseEvent) {
+                public void mouseMoved(MouseEvent evt) {
+                    mousePointPosition.x = evt.getX();
+                    mousePointPosition.y = evt.getY();
+                }
+            }
+        );
+
+        this.addMouseMotionListener (
+            new MouseAdapter() {
+                public void mouseDragged (MouseEvent event) {
 
                 }
             }
