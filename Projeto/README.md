@@ -1,6 +1,7 @@
 # <h2>Projeto LP2 </em></strong></h2>
 <h2> <strong><em>Comandos do programa</em></strong></h2>
 <h2> <strong><em>Criando as figuras</em></strong></h2>
+
 <p>
   
 <ul>
@@ -21,4 +22,6 @@
 <ul>
   <li> Caso queira deletar a figura, clique na mesma e aperte a tecla delete do seu teclado; <br /></li>
 </ul>
+
+</p>
 
