@@ -1,14 +1,18 @@
 package figures;
-
-
 import java.awt.*;
 
 public class Linha extends Figure {
 
 
     public Linha (int x, int y, int w, int h) {
-        super (x, y,w,h);
+        super (x, y,w,h,corBorda, corBorda);
     }
+
+
+    public boolean colision(int mx, int my){
+        return (this.x <= mx && mx<= this.x + this.w && this.y <= my && my <= this.y + this.h);
+    }
+
 
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
@@ -22,4 +26,5 @@ public class Linha extends Figure {
         g2d.setStroke(new BasicStroke (3));
         g2d.drawLine(x, y, w, h);
     }
+
 }

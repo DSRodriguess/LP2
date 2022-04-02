@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,9 +17,11 @@ class ListApp {
 class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
+    Point mouse = null;
+    Point posMouse = null;
     Figure selectedFigure = null;
-    Point mousePointPosition = new Point(0, 0);
-   
+    int x, y;
+
 
     ListFrame () {
         this.addWindowListener (
@@ -29,71 +32,67 @@ class ListFrame extends JFrame {
             }
         );
 
-        this.addMouseListener (
+        this.addMouseListener(
             new MouseAdapter() {
-
-                public int x, y;
-                public int size = 50;
-
-                public void mousePressed (MouseEvent evt) {
+                public void mousePressed(MouseEvent evt){
+                    mouse = getMousePosition();
                     selectedFigure = null;
-                    if (evt.getButton() == 1){
-                        Point mousePointPosition = new Point(evt.getX(),evt.getY());
-                        for (Figure fig:figs){
-                            System.out.println("chamo quando clicou");
-                            System.out.println(mousePointPosition);
-                            if ((mousePointPosition.x >= this.x) && (mousePointPosition.x <= this.x + this.size) && (mousePointPosition.y >= this.y) && (mousePointPosition.y <= this.y + this.size) == true){
-                                selectedFigure = fig;
-                            }
-                        }
 
-                        if (selectedFigure != null) {
-                            figs.remove(selectedFigure);
-                            figs.add(selectedFigure);
+                    for (int i = 0; i < figs.size(); i++){
+                        if (figs.get(i).colision(mouse.x,mouse.y)) {
+                            selectedFigure = figs.get(i); 
+                        } 
+                    }
+                    if (selectedFigure != null){ 
+                        figs.remove(selectedFigure);
+                        figs.add(selectedFigure);
+                    }
+                    repaint();
+                }
+            }
+            );
+
+            this.addMouseMotionListener( 
+                new MouseAdapter() {
+                    public void mouseDragged (MouseEvent evt) {
+                        if(selectedFigure != null){
+                            int dx = evt.getX() - mouse.x;
+                            int dy = evt.getY() - mouse.y;
+                            selectedFigure.drag(dx, dy);
+                            repaint();
                         }
+                        mouse = evt.getPoint();
                     }
                 }
-            }
-
-        );
-
-        this.addMouseMotionListener (
-            new MouseAdapter() {
-                public void mouseMoved(MouseEvent evt) {
-                    mousePointPosition.x = evt.getX();
-                    mousePointPosition.y = evt.getY();
-                }
-            }
-        );
-
-        this.addMouseMotionListener (
-            new MouseAdapter() {
-                public void mouseDragged (MouseEvent event) {
-
-                }
-            }
-        );
-   
+            );
 
 
 
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
+
                     int x = rand.nextInt(350);
                     int y = rand.nextInt(350);
                     int w = rand.nextInt(50);
                     int h = rand.nextInt(50);
 
                     if (evt.getKeyChar() == 'r') {
-                        Rect r = new Rect(x,y, w,h);
-                        figs.add(r);
+                        selectedFigure = new Rect(x,y, w,h);
+                        figs.add(selectedFigure);
                     } else if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(x,y, w,h));
+                        selectedFigure = (new Ellipse(x,y, w,h));
+                        figs.add (selectedFigure);
                     } else if (evt.getKeyChar() == 't') {
-                        figs.add(new Texto(x,y, h, h));
+                        selectedFigure = (new Texto(x,y, w, h));
+                        figs.add(selectedFigure);
                     }else if (evt.getKeyChar() == 'l') {
-                        figs.add(new Linha(x,y,w,h));
+                        selectedFigure = (new Linha(x,y,w,h));
+                        figs.add(selectedFigure);
+                    }
+                    else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+                        figs.remove(selectedFigure);
+                        selectedFigure = null;
                     }
                     repaint();
                 }
@@ -111,4 +110,6 @@ class ListFrame extends JFrame {
             fig.paint(g);
         }
     }
+
+    
 }
