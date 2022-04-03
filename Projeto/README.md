@@ -19,7 +19,7 @@
 
 <h2> Redimensionando as figuras</em></strong></h2>
 <ul>
-  <li> Caso queira redimencionar as figuras basta clicar sobre a mesma e apertar a tecla "+" do seuu teclado para almentar o tamanho da figura ou "-" para diminuir o tamanho da figura ; <br /></li>
+  <li> Caso queira redimencionar as figuras basta clicar sobre a mesma e apertar a tecla "+" do seu teclado para almentar o tamanho da figura ou "-" para diminuir o tamanho da figura ; <br /></li>
 </ul>
 
 <h2> Deletando a Figura</em></strong></h2>
