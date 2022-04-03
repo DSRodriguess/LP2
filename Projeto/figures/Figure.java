@@ -6,9 +6,6 @@ public abstract class Figure {
     protected int w, h;
     protected static Color corBorda;
     protected static Color corPreenchimento;
-    public int fillColorIndex = 0;
-    public int borderColorIndex = 10;
-    public int c = 1 ;
 
 
     public Figure (int x, int y, int w, int h, Color corBorda, Color corPreenchimento) {

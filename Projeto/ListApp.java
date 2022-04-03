@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
-
 import figures.*;
 
 class ListApp {
@@ -18,9 +16,7 @@ class ListFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
     Point mouse = null;
-    Point posMouse = null;
     Figure selectedFigure = null;
-    int x, y;
 
 
     ListFrame () {
