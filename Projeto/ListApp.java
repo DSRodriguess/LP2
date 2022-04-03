@@ -89,10 +89,23 @@ class ListFrame extends JFrame {
                     }else if (evt.getKeyChar() == 'l') {
                         selectedFigure = (new Linha(x,y,w,h));
                         figs.add(selectedFigure);
-                    }
-                    else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
-                        figs.remove(selectedFigure);
-                        selectedFigure = null;
+                    }else if (selectedFigure != null){
+                        if (evt.getKeyCode() == KeyEvent.VK_UP){ 
+                            selectedFigure.drag(0,-5);   
+                        }else if (evt.getKeyCode() == KeyEvent.VK_DOWN){ 
+                            selectedFigure.drag(0,5);
+                        }else if (evt.getKeyCode() == KeyEvent.VK_LEFT){ 
+                            selectedFigure.drag(-5,0);
+                        }else if (evt.getKeyCode() == KeyEvent.VK_RIGHT){ 
+                            selectedFigure.drag(5,0);
+                        }else if (evt.getKeyCode() == '=' || evt.getKeyCode() == '+'){ 
+                            selectedFigure.tamanho(5,5);
+                        }else if (evt.getKeyCode() == '-'){ 
+                            selectedFigure.tamanho(-5,-5);
+                        }else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+                            figs.remove(selectedFigure);
+                            selectedFigure = null;
+                        }
                     }
                     repaint();
                 }

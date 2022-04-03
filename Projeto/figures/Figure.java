@@ -29,4 +29,5 @@ public abstract class Figure {
 
     public abstract boolean colision(int mx, int my);
     public abstract void paint (Graphics g);
+    public abstract void tamanho(int w, int h);
 }

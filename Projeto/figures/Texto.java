@@ -24,4 +24,16 @@ public class Texto extends Figure {
         g2d.drawString("Teste de Texto", x, y);
     }
 
+    public void tamanho(int w, int h){
+        if(this.w >= 15 && this.w <= 100){
+            if(this.w == 100){
+                w = -5;
+            }
+            else if(this.w == 15){
+                w = +5;
+            }
+            this.w += w;
+        }
+    }
+
 }

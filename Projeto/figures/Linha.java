@@ -27,4 +27,20 @@ public class Linha extends Figure {
         g2d.drawLine(x, y, w, h);
     }
 
+    public void tamanho(int w, int h){
+        if(this.w >= 30 && this.w <= 200){
+            if(this.w == 200){
+                w = -5;
+                h = -5;
+            }
+            else if(this.w == 30){
+                w = +5;
+                h = +5;
+            }
+            
+            this.w += w;
+            this.h += h;
+        }
+    }
+
 }

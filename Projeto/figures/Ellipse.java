@@ -35,4 +35,21 @@ public class Ellipse extends Figure {
         g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
     }
 
+
+    public void tamanho(int w, int h){
+        if(this.w >= 30 && this.w <= 200){
+            if(this.w == 200){
+                w = -5;
+                h = -5;
+            }
+            else if(this.w == 30){
+                w = +5;
+                h = +5;
+            }
+            
+            this.w += w;
+            this.h += h;
+        }
+    }
+
 }
