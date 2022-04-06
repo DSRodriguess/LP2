@@ -115,7 +115,7 @@ class ListFrame extends JFrame {
                         selectedFigure = (new Texto("Teste texto",focusBlack,x,y));
                         figs.add(selectedFigure);
                     }else if (evt.getKeyChar() == 'l') {
-                        selectedFigure = new Linha(branco,x,y);
+                        selectedFigure = new Linha(branco,x,y,cor);
                         figs.add(selectedFigure);
                     }
                     
