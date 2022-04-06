@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
+
 import figures.*;
 
 class ListApp {
@@ -13,10 +14,18 @@ class ListApp {
 }
 
 class ListFrame extends JFrame {
+    
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    
     Random rand = new Random();
     Point mouse = null;
+    Point mousePos = null;
     Figure selectedFigure = null;
+
+    int cor [];
+    int branco[] = new int[] {255, 255, 255};
+    int focusRed[] = new int[] {255, 0, 0};
+    int focusBlack[] = new int[]{0,0,0};
 
 
     ListFrame () {
@@ -37,12 +46,26 @@ class ListFrame extends JFrame {
                     for (int i = 0; i < figs.size(); i++){
                         if (figs.get(i).colision(mouse.x,mouse.y)) {
                             selectedFigure = figs.get(i); 
-                        } 
+                        }
+
+                        else {
+                            if(figs.get(i).getClass().getSimpleName().equals("Texto")){
+                                figs.get(i).cor(focusBlack); 
+                            }
+                            else{
+                                figs.get(i).cor(branco); 
+                            }
+                        }    
+
+                        
                     }
+
                     if (selectedFigure != null){ 
                         figs.remove(selectedFigure);
                         figs.add(selectedFigure);
+                        selectedFigure.cor(focusRed);
                     }
+                    
                     repaint();
                 }
             }
@@ -68,24 +91,36 @@ class ListFrame extends JFrame {
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
 
-                    int x = rand.nextInt(350);
-                    int y = rand.nextInt(350);
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
+                    mousePos = getMousePosition();
+
+                    int x, y;
+
+                    if (mousePos != null) {
+                        x = mousePos.x;
+                        y = mousePos.y;
+                    }else{
+                        x = rand.nextInt(350);
+                        y = rand.nextInt(350);
+                    }
+
+                    cor = new int[] {rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)};
 
                     if (evt.getKeyChar() == 'r') {
-                        selectedFigure = new Rect(x,y, w,h);
+                        selectedFigure = new Rect(branco,x,y,cor);
                         figs.add(selectedFigure);
                     } else if (evt.getKeyChar() == 'e') {
-                        selectedFigure = (new Ellipse(x,y, w,h));
+                        selectedFigure = (new Ellipse(branco,x,y,cor));
                         figs.add (selectedFigure);
                     } else if (evt.getKeyChar() == 't') {
-                        selectedFigure = (new Texto(x,y, w, h));
+                        selectedFigure = (new Texto("Teste texto",focusBlack,x,y));
                         figs.add(selectedFigure);
                     }else if (evt.getKeyChar() == 'l') {
-                        selectedFigure = (new Linha(x,y,w,h));
+                        selectedFigure = new Linha(branco,x,y);
                         figs.add(selectedFigure);
-                    }else if (selectedFigure != null){
+                    }
+                    
+                    
+                    else if (selectedFigure != null){
                         if (evt.getKeyCode() == KeyEvent.VK_UP){ 
                             selectedFigure.drag(0,-5);   
                         }else if (evt.getKeyCode() == KeyEvent.VK_DOWN){ 
@@ -100,7 +135,6 @@ class ListFrame extends JFrame {
                             selectedFigure.tamanho(-5,-5);
                         }else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
                             figs.remove(selectedFigure);
-                            selectedFigure = null;
                         }
                     }
                     repaint();
@@ -110,7 +144,7 @@ class ListFrame extends JFrame {
 
         this.setTitle("Lista de Figuras");
         this.setSize(350, 350);
-
+        this.getContentPane().setBackground(Color.CYAN);
     }
 
     public void paint (Graphics g) {
