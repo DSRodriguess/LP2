@@ -1,6 +1,6 @@
 # LP2
 <h2> <strong><em>Quem sou eu?</em></strong></h2>
-<h4> Meu nome é David da Silva Rodrigues, sou do Rio de Janeiro, curso Ciencias da Computação na UERJ <br />
+<h4> Meu nome é David da Silva Rodrigues, sou do Rio de Janeiro, curso Ciencias da Computação pela UERJ <br />
      Atualmente sou estagiario na area de plataformas na ONS</h4>
 <p>
  
