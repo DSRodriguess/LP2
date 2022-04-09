@@ -53,7 +53,7 @@ class ListFrame extends JFrame {
                     if (selectedFigure != null){ 
                         figs.remove(selectedFigure);
                         figs.add(selectedFigure);
-                        selectedFigure.corBorda(255, 0, 132);
+                        selectedFigure.corBorda(255, 0, 0);
                     }
                     
                     repaint();
