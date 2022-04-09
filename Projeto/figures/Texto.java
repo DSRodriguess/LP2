@@ -2,10 +2,13 @@ package figures;
 import java.awt.*;
 
 public class Texto extends Figure {
+
     protected String texto;
 
-    public Texto (String texto, int [] cor, int x, int y) {
-        super (cor, x, y);
+    public Texto (String texto, int x, int y, int w, int h, int borda1, int borda2, int borda3, int preenchimento1, int preenchimento2, int preenchimento3) {
+        super ( x, y, borda1, borda2, borda3, preenchimento1, preenchimento2,preenchimento3);
+        this.w = w;
+        this.h = h;
         this.texto = texto;
         
     }
@@ -18,7 +21,7 @@ public class Texto extends Figure {
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(new Color(this.cor[1], this.cor[1], this.cor[1]));
+        g2d.setColor(new Color(this.preenchimento1,this.preenchimento2,this.preenchimento3));
         g2d.setFont(new Font("Ink Free", 1, this.w));
         g2d.drawString(this.texto, this.x, this.y);
     }

@@ -10,23 +10,20 @@ class ListApp {
     public static void main (String[] args) {
         ListFrame frame = new ListFrame();
         frame.setVisible(true);
+        frame.setFocusTraversalKeysEnabled(false);
     }
 }
 
 class ListFrame extends JFrame {
     
     ArrayList<Figure> figs = new ArrayList<Figure>();
-    
     Random rand = new Random();
+
     Point mouse = null;
     Point mousePos = null;
     Figure selectedFigure = null;
 
-    int cor [];
-    int branco[] = new int[] {255, 255, 255};
-    int focusRed[] = new int[] {255, 0, 0};
-    int focusBlack[] = new int[]{0,0,0};
-
+    int i, x, y, w, h, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
     ListFrame () {
         this.addWindowListener (
@@ -47,23 +44,16 @@ class ListFrame extends JFrame {
                         if (figs.get(i).colision(mouse.x,mouse.y)) {
                             selectedFigure = figs.get(i); 
                         }
-
-                        else {
-                            if(figs.get(i).getClass().getSimpleName().equals("Texto")){
-                                figs.get(i).cor(focusBlack); 
-                            }
-                            else{
-                                figs.get(i).cor(branco); 
-                            }
-                        }    
-
-                        
+                        else{
+                            figs.get(i).corBorda((0),(0),(0)); 
+                     }        
                     }
+                    
 
                     if (selectedFigure != null){ 
                         figs.remove(selectedFigure);
                         figs.add(selectedFigure);
-                        selectedFigure.cor(focusRed);
+                        selectedFigure.corBorda(255, 0, 132);
                     }
                     
                     repaint();
@@ -80,7 +70,7 @@ class ListFrame extends JFrame {
                             selectedFigure.drag(dx, dy);
                             repaint();
                         }
-                        mouse = evt.getPoint();
+                        mouse = ((MouseEvent)evt).getPoint();
                     }
                 }
             );
@@ -92,32 +82,35 @@ class ListFrame extends JFrame {
                 public void keyPressed (KeyEvent evt) {
 
                     mousePos = getMousePosition();
+                    int x = mousePos.x;
+                    int y = mousePos.y;
 
-                    int x, y;
+                     int w = 50;
+                     int h = 50;
 
-                    if (mousePos != null) {
-                        x = mousePos.x;
-                        y = mousePos.y;
-                    }else{
-                        x = rand.nextInt(350);
-                        y = rand.nextInt(350);
-                    }
+                     int borda1 = rand.nextInt(255);
+                     int borda2 = rand.nextInt(255);
+                     int borda3 = rand.nextInt(255);
+  
+                     int preenchimento1 = rand.nextInt(255);
+                     int preenchimento2 = rand.nextInt(255);
+                     int preenchimento3 = rand.nextInt(255);
 
-                    cor = new int[] {rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)};
 
                     if (evt.getKeyChar() == 'r') {
-                        selectedFigure = new Rect(branco,x,y,cor);
+                        selectedFigure = new Rect(x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
                         figs.add(selectedFigure);
                     } else if (evt.getKeyChar() == 'e') {
-                        selectedFigure = (new Ellipse(branco,x,y,cor));
+                        selectedFigure = (new Ellipse(x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add (selectedFigure);
                     } else if (evt.getKeyChar() == 't') {
-                        selectedFigure = (new Texto("Teste texto",focusBlack,x,y));
+                        selectedFigure = (new Texto("Projeto LP2",x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add(selectedFigure);
                     }else if (evt.getKeyChar() == 'l') {
-                        selectedFigure = new Linha(branco,x,y,cor);
+                        selectedFigure = (new Linha (x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add(selectedFigure);
                     }
+
                     
                     
                     else if (selectedFigure != null){
@@ -135,9 +128,43 @@ class ListFrame extends JFrame {
                             selectedFigure.tamanho(-5,-5);
                         }else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
                             figs.remove(selectedFigure);
+                            selectedFigure = null;
                         }
+                        
+                        else if (evt.getKeyChar() == 'p') {
+                            selectedFigure.corPreenchimento(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+                        }
+                        else if (evt.getKeyChar() == 'b') {
+                            selectedFigure.corBorda(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+                        }
+                        
+                        if (evt.getKeyCode() == KeyEvent.VK_TAB){
+                            if(selectedFigure != null){
+                                if (figs.size() > 0){
+                                    for(Figure fig: figs){
+                                        if(fig == figs.get(i)){
+                                            selectedFigure = figs.get(i);
+                                            selectedFigure.corBorda(255, 0, 132);
+                                        }
+                                        else{
+                                            fig.corBorda(0,0,0);
+                                        }
+                                    }
+                                    
+                                    figs.remove(selectedFigure);
+                                    figs.add(selectedFigure);
+                                    i++;
+                               
+                                    if (i >= figs.size()){
+                                    i = 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        
                     }
-                    repaint();
+                        repaint();
                 }
             }
         );
