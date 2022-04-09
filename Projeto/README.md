@@ -36,5 +36,11 @@
   <li> Caso queira deletar a figura, clique na mesma e aperte a tecla delete do seu teclado; <br /></li>
 </ul>
 
+<ul>
+  <li> OBS:. As figuras selecionadas com o teclado "Foco" ficam com a borda em vermelho, caso queira alterar o foco, clique em outra figura ou aperte a tecla "Tab" do seu teclado para alterar o foco  <br /></li>
+</ul>
+
 </p>
+
+
 
