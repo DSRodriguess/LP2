@@ -5,10 +5,11 @@
 <p>
   
 <ul>
-  <li> Clique na tecla E e surgira aleatoriamente uma elipse na tela; <br /></li>
-  <li> Clique na tecla R e surgira aleatoriamente uma retângulo na tela; <br /></li>
-  <li> Clique na tecla T e surgira aleatoriamente uma Texto na tela; <br /></li>
-  <li> Clique na tecla L e surgira aleatoriamente uma Linha na tela; <br /></li>
+  <li> Clique na tecla E e surgira na posição do seu mause uma elipse na tela; <br /></li>
+  <li> Clique na tecla R e surgira na posição do seu mause uma retângulo na tela; <br /></li>
+  <li> Clique na tecla T e surgira na posição do seu mause um Texto na tela; <br /></li>
+  <li> Clique na tecla L e surgira na posição do seu mause uma Linha na tela; <br /></li>
+
 </ul>
 
 <h2> Movendo as figuras</em></strong></h2>
@@ -37,7 +38,7 @@
 </ul>
 
 <ul>
-  <li> OBS:. As figuras selecionadas com o teclado "Foco" ficam com a borda em vermelho, caso queira alterar o foco, clique em outra figura ou aperte a tecla "Tab" do seu teclado para alterar o foco  <br /></li>
+  <li> OBS:. As figuras selecionadas com o teclado "Foco" ficam com a borda em vermelho, caso queira alterar o foco, clique em outra figura ou aperte a tecla "Tab" do seu teclado para alterar o foco.  <br /></li>
 </ul>
 
 </p>
