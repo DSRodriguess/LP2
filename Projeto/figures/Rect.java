@@ -4,7 +4,7 @@ import java.awt.*;
 public class Rect extends Figure {
 
     public Rect (int x, int y, int w, int h, int borda1, int borda2, int borda3, int preenchimento1, int preenchimento2, int preenchimento3) {
-        super ( x, y, borda1, borda2, borda3, preenchimento1, preenchimento2,preenchimento3);
+        super (x, y, borda1, borda2, borda3, preenchimento1, preenchimento2,preenchimento3);
         this.w = w;
         this.h = h;
     }

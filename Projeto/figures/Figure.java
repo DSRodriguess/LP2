@@ -1,7 +1,9 @@
 package figures;
-import java.awt.*;
 
-public abstract class Figure {
+import java.awt.*;
+import ivisible.IVisible;
+
+public abstract class Figure implements IVisible{
     protected int x, y;
     protected int w = 50, h = 50;
     protected int borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
