@@ -18,12 +18,17 @@ public class Texto extends Figure {
             this.texto, this.x, this.y);
     }
     
-    public void paint (Graphics g) {
+    public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(new Color(this.preenchimento1,this.preenchimento2,this.preenchimento3));
         g2d.setFont(new Font("Ink Free", 1, this.w));
         g2d.drawString(this.texto, this.x, this.y);
+
+        if (focused){
+            g2d.setColor(Color.red);
+            g2d.drawString(this.texto, this.x, this.y);
+        }
     }
 
 }

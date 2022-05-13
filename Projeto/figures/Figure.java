@@ -1,9 +1,11 @@
 package figures;
 
 import java.awt.*;
+import java.io.Serializable;
+
 import ivisible.IVisible;
 
-public abstract class Figure implements IVisible{
+public abstract class Figure implements IVisible, Serializable{
     protected int x, y;
     protected int w = 50, h = 50;
     protected int borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
@@ -38,7 +40,7 @@ public abstract class Figure implements IVisible{
     }
 
 
-    public boolean colision(int mx, int my){
+    public boolean clicked(int mx, int my){
         return (this.x <= mx && mx<= this.x + this.w && this.y <= my && my <= this.y + this.h);
     }
 
@@ -58,5 +60,5 @@ public abstract class Figure implements IVisible{
         }
     }
 
-    public abstract void paint (Graphics g);
+    public abstract void paint (Graphics g, boolean focused);
 }
