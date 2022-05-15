@@ -10,6 +10,9 @@ public class Rect extends Figure {
     }
 
 
+
+
+
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);

@@ -6,8 +6,10 @@ import java.io.Serializable;
 import ivisible.IVisible;
 
 public abstract class Figure implements IVisible, Serializable{
-    protected int x, y;
-    protected int w = 50, h = 50;
+    public int x;
+    public int y;
+    public int w = 50;
+    public int h = 50;
     protected int borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
 

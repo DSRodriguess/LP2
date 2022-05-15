@@ -10,6 +10,8 @@ public class Ellipse extends Figure {
         this.h = h;
     }
     
+ 
+
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);

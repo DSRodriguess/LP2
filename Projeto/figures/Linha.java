@@ -15,6 +15,8 @@ public class Linha extends Figure {
         this.h = 50;
     }
     
+
+
     public void print () {
         System.out.format("Linha de tamanho  (%d, %d) na posição: (%d, %d).\n", 
             this.w, this.h, this.x, this.y);

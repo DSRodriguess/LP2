@@ -17,15 +17,24 @@ class ListApp {
 class ListFrame extends JFrame {
     
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Button> buts = new ArrayList<Button>();
 
     Random rand = new Random();
     Point mouse = null;
     Point mousePos = null;
     Figure focused = null;
-
+    Button focus_but;
+    boolean but_clicked=false;
     int i, x, y, w, h, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
     ListFrame () {
+        
+        buts.add(new Button(0, new Rect(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3))); 
+        buts.add(new Button(1, new Ellipse(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));
+        buts.add(new Button(2, new Texto ("T", 0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));
+        buts.add(new Button(3, new Linha(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));     
+
+
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -41,7 +50,7 @@ class ListFrame extends JFrame {
                     focused = null;
 
                     int x = evt.getX();
-                    int y = evt.getY();;
+                    int y = evt.getY();
 
                     for (Figure fig: figs){
                         if(fig.clicked(x, y)){
