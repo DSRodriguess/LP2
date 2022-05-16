@@ -31,7 +31,22 @@ public class Button implements IVisible {
 
         g2d.setColor(Color.BLACK);
         g2d.drawRect(SPC, SPC+this.idx*DIM, DIM, DIM);
+        
+        switch(idx) {
+            case 2:
+            this.fig.y = PAD+SPC + idx*DIM + 15;
+            break;
 
+            case 3:
+            this.fig.y = PAD+SPC + idx*DIM + 20;
+            
+            break;
+
+            case 5:
+            this.fig.y = PAD+SPC + idx*DIM + 20;
+            break;
+        }
+       
         this.fig.paint(g, false);
     }
 }

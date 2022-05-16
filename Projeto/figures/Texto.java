@@ -15,6 +15,10 @@ public class Texto extends Figure {
 
 
 
+
+
+
+
     public void print () {
         System.out.format("Texto de conteúdo %s na posição %d, %d.\n",
             this.texto, this.x, this.y);

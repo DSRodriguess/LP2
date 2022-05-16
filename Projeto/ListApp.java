@@ -3,8 +3,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
-
+import java.awt.event.MouseEvent;
+import java.lang.String;
 import figures.*;
+
 
 class ListApp {
     public static void main (String[] args) {
@@ -20,21 +22,26 @@ class ListFrame extends JFrame {
     ArrayList<Button> buts = new ArrayList<Button>();
 
     Random rand = new Random();
+
+    Rect aux = new Rect (0, 0, 10, 10, 64, 64, 64, 255, 0, 132);
+
     Point mouse = null;
-    Point mousePos = null;
+    Point mousePos = null;    
     Figure focused = null;
-    Button focus_but;
+
+    Button focus_but = null;
     boolean but_clicked=false;
+
     int i, x, y, w, h, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
     ListFrame () {
         
-        buts.add(new Button(0, new Rect(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3))); 
-        buts.add(new Button(1, new Ellipse(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));
-        buts.add(new Button(2, new Texto ("T", 0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));
-        buts.add(new Button(3, new Linha(0,0,0,0,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3)));     
+        buts.add(new Button(1, new Rect(0, 0, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(2, new Ellipse(0,0, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(3, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(4, new Texto("T",40,225, 0,0, 0,0, 0,128,128,128)));
 
-
+          
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
@@ -177,12 +184,17 @@ class ListFrame extends JFrame {
         );
 
         this.setTitle("Lista de Figuras");
-        this.setSize(350, 350);
+        this.setSize(450, 450);
         this.getContentPane().setBackground(Color.CYAN);
     }
 
     public void paint (Graphics g) {
         super.paint(g);
+
+        for (Button but: this.buts){
+            but.paint(g, but == focus_but);
+        }
+
         for (Figure fig: this.figs) {
             fig.paint(g, fig == focused);
         }

@@ -1,5 +1,7 @@
 package figures;
+
 import java.awt.*;
+import java.awt.Color;
 
 public class Rect extends Figure {
 
@@ -8,10 +10,6 @@ public class Rect extends Figure {
         this.w = w;
         this.h = h;
     }
-
-
-
-
 
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
@@ -22,19 +20,16 @@ public class Rect extends Figure {
         Graphics2D g2d = (Graphics2D) g;
         
         g2d.setStroke(new BasicStroke(5)); 
-        
+
+        g2d.setColor(new Color(this.preenchimento1,this.preenchimento2,this.preenchimento3));
+        g2d.fillRect(this.x,this.y, this.w,this.h);    
         g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
-        g2d.fillRect(this.x,this.y, this.w,this.h);
+        g2d.drawRect(this.x,this.y, this.w,this.h);
 
         if (focused){
             g2d.setColor(Color.red);
             g2d.drawRect(this.x, this.y, this.w,this.h);
         }
-        else {
-            g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
-            g2d.drawRect(this.x, this.y, this.w, this.h);
-        }
-
     }
 
 }
