@@ -3,8 +3,8 @@ import figures.Figure;
 import java.awt.*;
 
 public class Button implements IVisible {
-    static int SPC = 20;
-    static int DIM = 40;
+    static int SPC = 32;
+    static int DIM = 45;
     static int PAD = 4;
 
     public  int    idx;
@@ -33,18 +33,16 @@ public class Button implements IVisible {
         g2d.drawRect(SPC, SPC+this.idx*DIM, DIM, DIM);
         
         switch(idx) {
+
             case 2:
             this.fig.y = PAD+SPC + idx*DIM + 15;
             break;
 
             case 3:
-            this.fig.y = PAD+SPC + idx*DIM + 20;
+            this.fig.y = PAD+SPC + idx*DIM + 30;
             
             break;
 
-            case 5:
-            this.fig.y = PAD+SPC + idx*DIM + 20;
-            break;
         }
        
         this.fig.paint(g, false);

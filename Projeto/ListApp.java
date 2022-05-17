@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.MouseEvent;
 import java.lang.String;
+
+
 import figures.*;
 
 
@@ -23,8 +25,6 @@ class ListFrame extends JFrame {
 
     Random rand = new Random();
 
-    Rect aux = new Rect (0, 0, 10, 10, 64, 64, 64, 255, 0, 132);
-
     Point mouse = null;
     Point mousePos = null;    
     Figure focused = null;
@@ -32,14 +32,17 @@ class ListFrame extends JFrame {
     Button focus_but = null;
     boolean but_clicked=false;
 
-    int i, x, y, w, h, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
+    int w = 50;
+    int h = 50;
+
+    int i, x, y, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
     ListFrame () {
         
-        buts.add(new Button(1, new Rect(0, 0, 0,0, 0,0,0, 0,0,0)));
-        buts.add(new Button(2, new Ellipse(0,0, 0,0, 0,0,0, 0,0,0)));
-        buts.add(new Button(3, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
-        buts.add(new Button(4, new Texto("T",40,225, 0,0, 0,0, 0,128,128,128)));
+        buts.add(new Button(0, new Rect(0, 0, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(1, new Ellipse(24,24, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(2, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
+        buts.add(new Button(3, new Texto("T",40,225, 0,0, 0,0, 0,0,0,0)));
 
           
         this.addWindowListener (
@@ -55,6 +58,16 @@ class ListFrame extends JFrame {
                 public void mousePressed(MouseEvent evt){
                     mouse = getMousePosition();
                     focused = null;
+                    focus_but = null;
+                    but_clicked = false;
+
+                    int borda1 = rand.nextInt(255);
+                    int borda2 = rand.nextInt(255);
+                    int borda3 = rand.nextInt(255);
+ 
+                    int preenchimento1 = rand.nextInt(255);
+                    int preenchimento2 = rand.nextInt(255);
+                    int preenchimento3 = rand.nextInt(255);
 
                     int x = evt.getX();
                     int y = evt.getY();
@@ -62,6 +75,8 @@ class ListFrame extends JFrame {
                     for (Figure fig: figs){
                         if(fig.clicked(x, y)){
                             focused = fig;
+                            focus_but = null;
+                            but_clicked = false;
                         }
                     }
                     
@@ -69,11 +84,37 @@ class ListFrame extends JFrame {
                         figs.remove(focused);
                         figs.add(focused);
                     }
+
+                    for (Button but:buts) {
+                        if(but.clicked(x,y)){ 
+                            focus_but = but;
+                            focused = null;
+                            but_clicked = true;
+                        }
+                    }
                     
                     repaint();
+
+                    if (focused == null && focus_but != null){
+                        if (focus_but == buts.get(0)) { 
+                            figs.add(new Rect(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));                              
+                        }
+                        else if (focus_but == buts.get(1)) {
+                            figs.add(new Ellipse(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                        }
+                        else if (focus_but == buts.get(2)) {
+                            figs.add(new Linha(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                        }
+                        else if (focus_but == buts.get(3)) {
+                            figs.add(new Texto("Projeto LP2",mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                        } 
+                     }
+
+                     repaint();
+
                 }
             }
-            );
+        );
 
             this.addMouseMotionListener( 
                 new MouseAdapter() {

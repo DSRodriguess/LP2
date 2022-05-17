@@ -22,9 +22,6 @@ public class Ellipse extends Figure {
     public void paint (Graphics g, boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
 
-
-        g2d.setStroke(new BasicStroke(5)); 
-
         g2d.setColor(new Color(this.preenchimento1,this.preenchimento2,this.preenchimento3));
         g2d.fill(new Ellipse2D.Double(this.x,this.y, this.w,this.h));
         g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
