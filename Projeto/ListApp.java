@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.MouseEvent;
 import java.lang.String;
-
+import java.io.*;
 
 import figures.*;
 
@@ -44,10 +44,32 @@ class ListFrame extends JFrame {
         buts.add(new Button(2, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(3, new Texto("T",40,225, 0,0, 0,0, 0,0,0,0)));
 
+        try{
+            FileInputStream f=new FileInputStream("proj.bin");
+            ObjectInputStream o=new ObjectInputStream(f);
+            this.figs=(ArrayList<Figure>) o.readObject();
+            o.close();
+          } 
+          
+          catch (Exception x) {
+              System.out.println("ERRO ao abrir o arquivo");
+          }
           
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing (WindowEvent e) {
+                    try {
+                        FileOutputStream f = new FileOutputStream("proj.bin");
+                        ObjectOutputStream o = new ObjectOutputStream(f);
+                        o.writeObject(figs);
+                        o.flush();
+                        o.close();
+                    }  
+                    
+                    catch (Exception x) {
+                        System.out.println("ERRO ao abrir o arquivo");
+                    }
+                    
                     System.exit(0);
                 }
             }
@@ -131,7 +153,6 @@ class ListFrame extends JFrame {
             );
 
 
-
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
@@ -199,10 +220,6 @@ class ListFrame extends JFrame {
                                     for(Figure fig: figs){
                                         if(fig == figs.get(i)){
                                             focused = figs.get(i);
-                                            focused.corBorda(255, 0, 132);
-                                        }
-                                        else{
-                                            fig.corBorda(0,0,0);
                                         }
                                     }
                                     
