@@ -117,18 +117,27 @@ class ListFrame extends JFrame {
                     
                     repaint();
 
-                    if (focused == null && focus_but != null){
+                    if (focus_but != null){
                         if (focus_but == buts.get(0)) { 
-                            figs.add(new Rect(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));                              
+                            Figure fig = new Rect(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
+                            figs.add(fig);
+                            focused = fig;                      
                         }
-                        else if (focus_but == buts.get(1)) {
-                            figs.add(new Ellipse(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                       else if (focus_but == buts.get(1)) {
+                            Figure fig = new Ellipse(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
+                            figs.add(fig);
+                            focused = fig;   
                         }
                         else if (focus_but == buts.get(2)) {
-                            figs.add(new Linha(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                            Figure fig = new Linha(mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
+                            figs.add(fig);
+                            focused = fig;   
+
                         }
                         else if (focus_but == buts.get(3)) {
-                            figs.add(new Texto("Projeto LP2",mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                            Figure fig = new Texto("Projeto LP2",mouse.x,mouse.y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
+                            figs.add(fig);
+                            focused = fig;   
                         } 
                      }
 
@@ -138,19 +147,25 @@ class ListFrame extends JFrame {
             }
         );
 
-            this.addMouseMotionListener( 
-                new MouseAdapter() {
-                    public void mouseDragged (MouseEvent evt) {
-                        if(focused != null){
-                            int dx = evt.getX() - mouse.x;
-                            int dy = evt.getY() - mouse.y;
-                            focused.drag(dx, dy);
-                            repaint();
-                        }
-                        mouse = ((MouseEvent)evt).getPoint();
-                    }
+        this.addMouseMotionListener (
+            new MouseAdapter() {
+                public void mouseMoved(MouseEvent evt) {
+                    x = evt.getX();
+                    y = evt.getY();
                 }
-            );
+
+   
+                public void mouseDragged (MouseEvent evt) {
+                    if(focused != null){
+                        int dx = evt.getX() - mouse.x;
+                        int dy = evt.getY() - mouse.y;
+                        focused.drag(dx, dy);
+                        repaint();
+                        }
+                    mouse = ((MouseEvent)evt).getPoint();
+                }
+            }
+        );
 
 
         this.addKeyListener (
@@ -245,6 +260,8 @@ class ListFrame extends JFrame {
         this.setSize(450, 450);
         this.getContentPane().setBackground(Color.CYAN);
     }
+
+
 
     public void paint (Graphics g) {
         super.paint(g);
