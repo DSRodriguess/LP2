@@ -44,8 +44,22 @@ public class Button implements IVisible {
             
             break;
 
+            case 4:
+            this.fig.y = PAD+SPC + idx*DIM + 25;
+            
+            break;
+
+            case 5:
+            this.fig.y = PAD+SPC + idx*DIM + 25;
+            
+            break;
+
         }
        
         this.fig.paint(g, false);
     }
+    
+    public int getIdx(){
+		return idx;
+	}
 }

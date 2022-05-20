@@ -20,7 +20,8 @@
 
 <h2> Redimensionando as figuras</em></strong></h2>
 <ul>
-  <li> Caso queira redimencionar as figuras basta clicar sobre a mesma e apertar a tecla "+" do seu teclado para aumentar o tamanho da figura ou "-" para diminuir o tamanho da figura ; <br /></li>
+  <li> Caso queira redimencionar as figuras basta clicar sobre a mesma e apertar a tecla "+" do seu teclado para aumentar o tamanho da figura, "-" para diminuir o tamanho da figura ou ajuste pelo mouse clicando na borda; <br /></li>
+  
 </ul>
 
 <h2> Alterando as cores das figuras </em></strong></h2>
@@ -42,6 +43,21 @@
 </ul>
 
 </p>
+
+<h1> <strong><em>Novo!</em></strong></h1>
+
+<h2> <strong><em>Menu</em></strong></h2>
+<p>
+<ul>
+  <li> Clique no quadrado e na posição que deseja criar o mesmo;<br /></li>
+  <li> Clique na elipse e na posição que deseja criar o mesmo; <br /></li>
+  <li> Clique na linha e na posição que deseja criar o mesmo; <br /></li>
+  <li> Clique na texto e na posição que deseja criar o mesmo; <br /></li>
+  <li> Caso clique em limpar será limpo toda as figuras na tela; <br /></li>
+  <li> Caso clique em sair o programa sera fechado! <br /></li>
+</ul>
+</p>
+
 
 
 

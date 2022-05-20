@@ -45,21 +45,19 @@ public abstract class Figure implements IVisible, Serializable{
         return (this.x <= mx && mx<= this.x + this.w && this.y <= my && my <= this.y + this.h);
     }
 
-    public void tamanho (int w, int h){
-        if(this.w >= 30 && this.w <= 200){
-            if(this.w == 200){
-                w = -5;
-                h = -5;
+    public void tamanho (int rw){
+            if(w >= 200){
+                w = 198;
+                h = 198;
             }
             else if(this.w == 30){
-                w = +5;
-                h = +5;
+                w = 32;
+                h = 32;
             }
             
-            this.w += w;
-            this.h += h;
+            w += rw;
+            h += rw;
         }
-    }
 
     public abstract void paint (Graphics g, boolean focused);
 }

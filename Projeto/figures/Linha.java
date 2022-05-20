@@ -26,7 +26,7 @@ public class Linha extends Figure {
         Graphics2D g2d = (Graphics2D) g;
         
 
-        g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
+        g2d.setColor(new Color(this.preenchimento1,this.preenchimento2,this.preenchimento3));
         g2d.drawLine(this.x, this.y, this.x + this.w, this.y);
 
         
