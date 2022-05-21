@@ -16,35 +16,36 @@ class ListApp {
     }
 }
 
-class ListFrame extends JFrame {
-    
+class ListFrame extends JFrame {   
     ArrayList<Figure> figs = new ArrayList<Figure>();
     ArrayList<Button> buts = new ArrayList<Button>();
 
     Random rand = new Random();
-    Rect aux = new Rect (0, 0, 10, 10, 64, 64, 64, 255, 0, 132);
+
+    Rect aux = new Rect (0, 0, 5, 5, 255, 0, 0, 255, 0, 0);
 
     Point mouse = null;
-    Point mousePos = null;    
+    Point mousePos = null; 
+
     Figure focused = null;
     Figure focusedAux = null;
 
     Button focus_but = null;
+
     boolean but_clicked= false;
     boolean auxB = false;
+    boolean auxKey = false;
 
     int w = 50;
     int h = 50;
-
     int i, x, y, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3,posX = 0, posY = 0, indice;
-    boolean auxKey = false;
 
-    ListFrame () {
+    ListFrame (){
         
         buts.add(new Button(0, new Rect(0, 0, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(1, new Ellipse(24,24, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(2, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
-        buts.add(new Button(3, new Texto("T",40,225, 0,0, 0,0, 0,0,0,0)));       
+        buts.add(new Button(3, new Texto("T",0,0, 0,0, 0,0, 0,0,0,0)));       
         buts.add(new Button(4, new ButaoTx("Limpar",0,0, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(5, new ButaoTx("Sair",0,0, 0,0, 0,0,0, 0,0,0)));
         
@@ -55,15 +56,15 @@ class ListFrame extends JFrame {
             ObjectInputStream o=new ObjectInputStream(f);
             figs = (ArrayList<Figure>) o.readObject();
             o.close();
-          } 
+        } 
           
-          catch (Exception x) {
-              System.out.println("ERRO ao abrir o arquivo");
-          }
+        catch (Exception x){
+            System.out.println("ERRO ao abrir o arquivo");
+        }
           
         this.addWindowListener (
             new WindowAdapter() {
-                public void windowClosing (WindowEvent e) {
+                public void windowClosing (WindowEvent e){
                     try {
                         FileOutputStream f = new FileOutputStream("proj.bin");
                         ObjectOutputStream o = new ObjectOutputStream(f);
@@ -72,10 +73,9 @@ class ListFrame extends JFrame {
                         o.close();
                     }  
                     
-                    catch (Exception x) {
+                    catch (Exception x){
                         System.out.println("ERRO ao abrir o arquivo");
-                    }
-                    
+                    }                    
                     System.exit(0);
                 }
             }
@@ -94,7 +94,7 @@ class ListFrame extends JFrame {
                             auxB = false;
                             focus_but = null;
                         }
-                }
+                    }
 
                     for (Button but:buts) {
                         if(but.clicked(mouse.x,mouse.y)){ 
@@ -103,43 +103,38 @@ class ListFrame extends JFrame {
 
                             if(but.idx > 4 ){
                                 figureBut(focus_but.idx, mouse.x, mouse.y);
-                               }
+                            }
                         }
                     }
 
-                    for (int i = 0; i < figs.size(); i++) {
-
+                    for (int i = 0; i < figs.size(); i++){
                         if (figs.get(i).clicked(mouse.x,mouse.y)) {
                             focused = figs.get(i); 
                             focusedAux = focused;    
-                        }
-                        
+                        }                       
                         else if(aux.clicked(mouse.x, mouse.y)){
                             focused = figs.get(i);  
                             focusedAux = focused;    
-                            auxKey = true;
-                            
+                            auxKey = true;                          
                         }
                         else{
                             focusedAux = focused;
                             auxKey = false;
                         }
 
-                     }
+                    }
                      
                     if (focused != null){ 
                         figs.remove(focused);
                         figs.add(focused);
                     }
-
                 repaint();
+                }
             }
-        }
         );
 
         this.addMouseMotionListener (
-            new MouseAdapter() {
-                
+            new MouseAdapter(){               
                 public void mouseDragged (MouseEvent evt) {
                     if(auxKey){
                         focused.tamanho(evt.getX() - mouse.x);
@@ -149,12 +144,10 @@ class ListFrame extends JFrame {
                             int dx = evt.getX() - mouse.x;
                             int dy = evt.getY() - mouse.y;
                             focused.drag(dx, dy);
-                            }
                         }
-
+                    }
                         mouse = evt.getPoint();
-                        repaint(); 
-                
+                        repaint();               
                 }
             }
         );
@@ -163,7 +156,7 @@ class ListFrame extends JFrame {
         this.addKeyListener (
             new KeyAdapter() {
                 public void keyPressed (KeyEvent evt) {
-
+                    
                     mousePos = getMousePosition();
 
                     int x = mousePos.x;
@@ -181,16 +174,16 @@ class ListFrame extends JFrame {
                     int preenchimento3 = rand.nextInt(255);
 
 
-                    if (evt.getKeyChar() == 'r') {
+                    if (evt.getKeyChar() == 'r'){
                         focused = new Rect(x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
                         figs.add(focused);
-                    } else if (evt.getKeyChar() == 'e') {
+                    } else if (evt.getKeyChar() == 'e'){
                         focused = (new Ellipse(x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add (focused);
-                    } else if (evt.getKeyChar() == 't') {
+                    } else if (evt.getKeyChar() == 't'){
                         focused = (new Texto("Projeto LP2",x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add(focused);
-                    }else if (evt.getKeyChar() == 'l') {
+                    } else if (evt.getKeyChar() == 'l'){
                         focused = (new Linha (x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add(focused);
                     }
@@ -244,7 +237,7 @@ class ListFrame extends JFrame {
 
                         
                     }
-                        repaint();
+                    repaint();
                 }
             }
         );
@@ -255,7 +248,7 @@ class ListFrame extends JFrame {
     }
 
     public void figureBut(int idx, int x, int y){
-        if (idx == 0) {
+        if (idx == 0){
             Figure fig = new Rect(x,y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
             figs.add(fig);
             focused = fig;   
@@ -280,25 +273,25 @@ class ListFrame extends JFrame {
             int i = JOptionPane.showConfirmDialog(null, "Deseja limpar a tela ?", "limpar",
             JOptionPane.YES_NO_OPTION);
             
-            if (i == JOptionPane.YES_OPTION) {
+            if (i == JOptionPane.YES_OPTION){
                 figs.clear();
-                }
-            else if(i == JOptionPane.NO_OPTION) {
+            }
+            else if(i == JOptionPane.NO_OPTION){
                 System.out.close();
 
-                }
+            }
         }
 
         else if (idx == 5){
             int i = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair do programa ?", "sair",
             JOptionPane.YES_NO_OPTION);
             
-            if (i == JOptionPane.YES_OPTION) {
+            if (i == JOptionPane.YES_OPTION){
                 System.exit(0);
-                }
-            else if(i == JOptionPane.NO_OPTION) {
+            }
+            else if(i == JOptionPane.NO_OPTION){
                 System.out.close();
-                }
+            }
         }
 
     }

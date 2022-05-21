@@ -12,10 +12,10 @@ public class ButaoTx extends Figure{
         this.texto = texto;        
     }
 
-    public void paint (Graphics g, boolean focused) {
+    public void paint (Graphics g, boolean focused){
+
         Graphics2D g2d = (Graphics2D) g;
-        
-        g2d.setFont(new Font("Agency FB", 1, this.w/2));
+        g2d.setFont(new Font("arial", 1, this.w/3));
         g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
         g2d.drawString(this.texto, this.x, this.y);
     }    

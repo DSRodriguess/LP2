@@ -12,7 +12,7 @@ public abstract class Figure implements IVisible, Serializable{
     protected int borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
 
-    public Figure (int x, int y, int borda1, int borda2, int borda3, int preenchimento1, int preenchimento2, int preenchimento3) {
+    public Figure (int x, int y, int borda1, int borda2, int borda3, int preenchimento1, int preenchimento2, int preenchimento3){
         this.x = x;
         this.y = y;
         this.borda1 = borda1;
@@ -23,7 +23,7 @@ public abstract class Figure implements IVisible, Serializable{
         this.preenchimento3 = preenchimento3;
     }
 
-    public void drag (int dx, int dy) {
+    public void drag (int dx, int dy){
         this.x += dx;
         this.y += dy;
     }
@@ -53,8 +53,7 @@ public abstract class Figure implements IVisible, Serializable{
             else if(this.w == 30){
                 w = 32;
                 h = 32;
-            }
-            
+            }           
             w += rw;
             h += rw;
         }
