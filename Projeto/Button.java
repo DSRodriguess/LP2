@@ -40,7 +40,7 @@ public class Button implements IVisible{
         break;
 
         case 3:
-        this.fig.y = PAD+SPC + idx*DIM + 30;
+        this.fig.y = PAD+SPC + idx*DIM + 25;
         break;
 
         case 4:

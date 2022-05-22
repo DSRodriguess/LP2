@@ -7,8 +7,8 @@ import ivisible.IVisible;
 public abstract class Figure implements IVisible, Serializable{
     public int x;
     public int y;
-    public int w = 50;
-    public int h = 50;
+    public int w;
+    public int h;
     protected int borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3;
 
 
@@ -24,8 +24,12 @@ public abstract class Figure implements IVisible, Serializable{
     }
 
     public void drag (int dx, int dy){
-        this.x += dx;
-        this.y += dy;
+        if(x < 65){
+            x = 66;
+        }else{
+            this.x += dx;
+            this.y += dy;
+        }
     }
 
     public void corBorda(int a, int b, int c){
@@ -50,9 +54,9 @@ public abstract class Figure implements IVisible, Serializable{
                 w = 198;
                 h = 198;
             }
-            else if(this.w == 30){
-                w = 32;
-                h = 32;
+            else if(this.w == 5){
+                w = 7;
+                h = 7;
             }           
             w += rw;
             h += rw;

@@ -45,7 +45,7 @@ class ListFrame extends JFrame {
         buts.add(new Button(0, new Rect(0, 0, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(1, new Ellipse(24,24, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(2, new Linha(24,24, 0,0, 0,0,0, 0,0,0)));
-        buts.add(new Button(3, new Texto("T",0,0, 0,0, 0,0, 0,0,0,0)));       
+        buts.add(new Button(3, new ButaoTx("Texto",0,0, 0,0, 0,0, 0,0,0,0)));       
         buts.add(new Button(4, new ButaoTx("Limpar",0,0, 0,0, 0,0,0, 0,0,0)));
         buts.add(new Button(5, new ButaoTx("Sair",0,0, 0,0, 0,0,0, 0,0,0)));
         
@@ -181,7 +181,7 @@ class ListFrame extends JFrame {
                         focused = (new Ellipse(x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add (focused);
                     } else if (evt.getKeyChar() == 't'){
-                        focused = (new Texto("Projeto LP2",x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
+                        focused = (new Texto("\nProjeto LP2",x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
                         figs.add(focused);
                     } else if (evt.getKeyChar() == 'l'){
                         focused = (new Linha (x,y,w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3));
@@ -265,7 +265,7 @@ class ListFrame extends JFrame {
             focused = fig;   
         }
         else if (idx == 3){
-            Figure fig = new Texto("Projeto LP2",x,y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
+            Figure fig = new Texto("\nProjeto LP2",x,y, w,h,borda1,borda2,borda3,preenchimento1,preenchimento2,preenchimento3);
             figs.add(fig);
             focused = fig;  
         }
