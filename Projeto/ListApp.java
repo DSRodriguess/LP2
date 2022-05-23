@@ -89,7 +89,7 @@ class ListFrame extends JFrame {
                     mouse = evt.getPoint();
 
                     if(auxB && focus_but != null){
-                        if(!(mouse.x < 60 && mouse.y < 680) && focus_but.idx != 9 && focus_but.idx != 10 && focus_but.idx != 12){
+                        if(!(mouse.x < 60 && mouse.y < 680)){
                             figureBut(focus_but.idx, mouse.x, mouse.y);
                             auxB = false;
                             focus_but = null;
@@ -100,10 +100,6 @@ class ListFrame extends JFrame {
                         if(but.clicked(mouse.x,mouse.y)){ 
                             focus_but = but;
                             auxB = true;
-
-                            if(but.idx > 4 ){
-                                figureBut(focus_but.idx, mouse.x, mouse.y);
-                            }
                         }
                     }
 
@@ -310,9 +306,11 @@ class ListFrame extends JFrame {
         if(focused != null){
             aux.x = focused.x + (focused.w + 3);
             aux.y = focused.y + (focused.h + 3);
+            if(focused.getClass().getSimpleName().equals("Linha")){
+                aux.x = focused.x + (focused.w + 10);
+                aux.y = focused.y - 5;
+            }
             aux.paint(g, true);
         }
-
-    }
-    
+    }    
 }

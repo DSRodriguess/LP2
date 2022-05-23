@@ -9,8 +9,7 @@ public class Texto extends Figure {
         super ( x, y, borda1, borda2, borda3, preenchimento1, preenchimento2,preenchimento3);
         this.w = w;
         this.h = h;
-        this.texto = texto;
-        
+        this.texto = texto;    
     }
 
     public void print (){
@@ -29,6 +28,13 @@ public class Texto extends Figure {
         g2d.setColor(Color.red);
         g2d.drawString(this.texto, this.x, this.y);
         }
+    }
+
+    public boolean clicked(int mx, int my){
+        if(mx >= this.x && mx <= this.x + this.w && my <= this.y && my >= this.y - this.h){
+            return true;
+        }
+        return false;
     }
 
 }
