@@ -7,14 +7,31 @@ public class Texto extends Figure {
 
     public Texto (String texto, int x, int y, int w, int h, int borda1, int borda2, int borda3, int preenchimento1, int preenchimento2, int preenchimento3) {
         super ( x, y, borda1, borda2, borda3, preenchimento1, preenchimento2,preenchimento3);
-        this.w = w;
-        this.h = h;
+        this.w = 50;
+        this.h = 50;
         this.texto = texto;    
     }
 
     public void print (){
         System.out.format("Texto de conteúdo %s na posição %d, %d.\n",
         this.texto, this.x, this.y);
+    }
+
+    public boolean clicked (int mx, int my){
+        return (this.x <= mx && mx<= this.x + this.w && this.y - 20 <= my && my <= this.y + 20);
+    }
+
+    public void resize (int dx, int dy, int tipo){
+        if(w >= 200){
+            w = 198;
+            h = 198;
+        }
+        else if(this.w == 5){
+            w = 7;
+            h = 7;
+        }           
+        w += dx;
+        h += dy;
     }
     
     public void paint (Graphics g, boolean focused){
@@ -30,11 +47,5 @@ public class Texto extends Figure {
         }
     }
 
-    public boolean clicked(int mx, int my){
-        if(mx >= this.x && mx <= this.x + this.w && my <= this.y && my >= this.y - this.h){
-            return true;
-        }
-        return false;
-    }
 
 }

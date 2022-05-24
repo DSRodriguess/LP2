@@ -15,6 +15,70 @@ public class Rect extends Figure{
         this.w, this.h, this.x, this.y);
     }
 
+    public void resize(int dx, int dy, int tipo)
+    {
+        if(tipo == 5) 
+        {
+            this.w += dx*2;
+            this.h += dx*2;
+            this.x -= dx;
+            this.y -= dx;
+
+            if(this.w <= 10 || this.h <= 10)
+            {
+                this.w -= dx*2;
+                this.x += dx;
+
+                this.h -= dx*2;
+                this.y += dx;
+            }
+        }
+        else if(tipo == 4) //W
+        {
+            this.w += dx*2;
+            this.x -= dx;
+
+            if(this.w <= 10)
+            {
+                this.w -= dx*2;
+                this.x += dx;
+            }
+        }
+        else if(tipo == 3) // E
+        {
+            this.w -= dx*2;
+            this.x += dx;
+
+            if(this.w <= 10)
+            {
+                this.w += dx*2;
+                this.x -= dx;
+            }
+        }
+        else if(tipo == 2) //S
+        {
+            this.h += dy*2;
+            this.y -= dy;
+
+            if(this.h <= 10)
+            {
+                this.h -= dy*2;
+                this.y += dy;
+            }
+        }
+        else if(tipo == 1) //N
+        {
+            this.h -= dy*2;
+            this.y += dy;
+
+            if(this.h <= 10)
+            {
+                this.h += dy*2;
+                this.y -= dy;
+            }
+        }
+    }
+
     public void paint (Graphics g, boolean focused){
 
         Graphics2D g2d = (Graphics2D) g;
@@ -25,7 +89,14 @@ public class Rect extends Figure{
 
         if (focused){
             g2d.setColor(Color.red);
-            g2d.drawRect(this.x, this.y, this.w,this.h);
+            g2d.fillOval((x + w/2) - 3, y - 3, 6, 6);
+            g2d.fillOval((x + w) - 3, y - 3, 6, 6);
+            g2d.fillOval((x + w) - 3, (y + h/2) - 3, 6, 6);
+            g2d.fillOval((x + w) - 3, (y + h) - 3, 6, 6);
+            g2d.fillOval((x + w/2) - 3, (y+h) -3, 6, 6);
+            g2d.fillOval(x - 3, (y+h) -3, 6, 6);
+            g2d.fillOval(x - 3, (y + h/2) - 3, 6, 6);
+            g2d.fillOval(x - 3, y - 3, 6, 6);
         }
     }
 

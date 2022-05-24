@@ -34,11 +34,15 @@ class ListFrame extends JFrame {
 
     boolean but_clicked= false;
     boolean auxB = false;
-    boolean auxKey = false;
+    boolean verifica = false;
 
     int w = 50;
     int h = 50;
-    int i, x, y, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3,posX = 0, posY = 0, indice;
+    int i, x, y, borda1, borda2, borda3, preenchimento1, preenchimento2, preenchimento3,posX = 0, posY = 0, indice,numBut = -1;
+    boolean auxKey = false, auxKey2 = false, quadAux = true;
+    Color butBack, butLine;
+
+    boolean n, s, west, e;
 
     ListFrame (){
         
@@ -84,9 +88,18 @@ class ListFrame extends JFrame {
         this.addMouseListener(
             new MouseAdapter() {
                 public void mousePressed(MouseEvent evt){
+                    quadAux = true;
                     focused = null;
+                    mouse  = evt.getPoint();
                     auxKey = false;
-                    mouse = evt.getPoint();
+                    verifica = false;
+                    n = false;
+                    s = false;
+                    west = false;
+                    e = false;
+
+                    int whereX = evt.getX();
+                    int whereY = evt.getY();
 
                     if(auxB && focus_but != null){
                         if(!(mouse.x < 60 && mouse.y < 680)){
@@ -96,21 +109,39 @@ class ListFrame extends JFrame {
                         }
                     }
 
-                    for (Button but:buts) {
-                        if(but.clicked(mouse.x,mouse.y)){ 
-                            focus_but = but;
-                            auxB = true;
-                        }
-                    }
-
                     for (int i = 0; i < figs.size(); i++){
                         if (figs.get(i).clicked(mouse.x,mouse.y)) {
                             focused = figs.get(i); 
-                            focusedAux = focused;    
-                        }                       
+                            int[] coordenada = new int[]{focused.x, focused.y};
+                            int[] tamanho = new int[]{focused.w, focused.h};
+
+                            if (whereX >= coordenada[0] && whereX <= coordenada[0] + tamanho[0] &&
+                                    whereY >= coordenada[1] && whereY <= coordenada[1] + 5)
+                            {
+                                n = true;
+                            }
+                            else if (whereX >= coordenada[0] && whereX <= coordenada[0] + tamanho[0] &&
+                                    whereY >= coordenada[1] + tamanho[1] - 5 && whereY <= coordenada[1] + tamanho[1])
+                            {
+                                s = true;
+                            }
+                            else if (whereX >= coordenada[0] && whereX <= coordenada[0] + 5 &&
+                                    whereY >= coordenada[1] && whereY <= coordenada[1] + tamanho[1])
+                            {
+                                e = true;
+                            }
+                            else if (whereX >= coordenada[0] + tamanho[0] - 5 && whereX <= coordenada[0] + tamanho[0] &&
+                                    whereY >= coordenada[1] && whereY <= coordenada[1] + tamanho[1])
+                            {
+                                west = true;
+                            }
+                            else {
+                                verifica = true;
+                            }
+                        }
+                                           
                         else if(aux.clicked(mouse.x, mouse.y)){
-                            focused = figs.get(i);  
-                            focusedAux = focused;    
+                            focused = figs.get(i);   
                             auxKey = true;                          
                         }
                         else{
@@ -124,6 +155,16 @@ class ListFrame extends JFrame {
                         figs.remove(focused);
                         figs.add(focused);
                     }
+
+
+                    for (Button but:buts) {
+                        if(but.clicked(mouse.x,mouse.y)){ 
+                            focus_but = but;
+                            auxB = true;
+                        }
+                    }
+
+
                 repaint();
                 }
             }
@@ -132,14 +173,39 @@ class ListFrame extends JFrame {
         this.addMouseMotionListener (
             new MouseAdapter(){               
                 public void mouseDragged (MouseEvent evt) {
-                    if(auxKey){
-                        focused.tamanho(evt.getX() - mouse.x);
-                    }
-                    else{
-                        if(focused != null){
-                            int dx = evt.getX() - mouse.x;
-                            int dy = evt.getY() - mouse.y;
-                            focused.drag(dx, dy);
+                    int whereX = evt.getX() - mouse.x;
+                    int whereY = evt.getY() - mouse.y;
+    
+                    if(focused != null)
+                    {
+                        int[] coordenada = new int[]{focused.x, focused.y};
+                        int[] tamanho = new int[]{focused.w, focused.h};
+                        if(auxKey)
+                        {
+                            focused.resize(whereX, whereY, 5);
+                        }
+                        else
+                        {
+                            if (n)
+                            {
+                                focused.resize(whereX, whereY, 1);
+                            }
+                            else if (s)
+                            {
+                                focused.resize(whereX, whereY, 2);
+                            }
+                            else if (e)
+                            {
+                                focused.resize(whereX, whereY, 3);
+                            }
+                            else if (west)
+                            {
+                                focused.resize(whereX, whereY, 4);
+                            }
+                            else
+                            {
+                                focused.drag(whereX, whereY);
+                            }
                         }
                     }
                         mouse = evt.getPoint();
@@ -194,11 +260,7 @@ class ListFrame extends JFrame {
                         }else if (evt.getKeyCode() == KeyEvent.VK_LEFT){ 
                             focused.drag(-5,0);
                         }else if (evt.getKeyCode() == KeyEvent.VK_RIGHT){ 
-                            focused.drag(5,0);
-                        }else if (evt.getKeyCode() == '=' || evt.getKeyCode() == '+'){ 
-                            focused.tamanho(5);
-                        }else if (evt.getKeyCode() == '-'){ 
-                            focused.tamanho(-5);                       
+                            focused.drag(5,0);                    
                         }else if(evt.getKeyCode() == KeyEvent.VK_DELETE){
                             figs.remove(focused);
                             focused= null;
@@ -303,13 +365,17 @@ class ListFrame extends JFrame {
             fig.paint(g, fig == focused);
         }
 
-        if(focused != null){
-            aux.x = focused.x + (focused.w + 3);
-            aux.y = focused.y + (focused.h + 3);
+        if(focused != null && quadAux){
+            aux.x = focused.x + (focused.w + 10);
+            aux.y = focused.y + (focused.h + 10);
             if(focused.getClass().getSimpleName().equals("Linha")){
                 aux.x = focused.x + (focused.w + 10);
                 aux.y = focused.y - 5;
+            } else if(focused.getClass().getSimpleName().equals("Texto")){
+                aux.x = focused.x + (focused.w + 60);
+                aux.y = focused.y - 5;
             }
+
             aux.paint(g, true);
         }
     }    

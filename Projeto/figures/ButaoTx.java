@@ -18,5 +18,9 @@ public class ButaoTx extends Figure{
         g2d.setFont(new Font("arial", 1, this.w/3));
         g2d.setColor(new Color(this.borda1,this.borda2,this.borda3));
         g2d.drawString(this.texto, this.x, this.y);
-    }    
+    }
+    
+    public void resize(int x, int y, int tipo) {
+
+    }
 }
